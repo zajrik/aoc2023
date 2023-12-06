@@ -41,7 +41,6 @@ part 'solutions/09/part2.dart';
 part 'solutions/10/part1.dart';
 part 'solutions/10/part2.dart';
 
-
 part 'solutions/11/part1.dart';
 part 'solutions/11/part2.dart';
 
