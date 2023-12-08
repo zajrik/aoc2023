@@ -39,6 +39,7 @@ class SolutionRunner {
 				final InputType inputType = switch (solution.parameters.first.type.reflectedType) {
 					const (String) => InputType.raw,
 					const (List<String>) => InputType.lines,
+					const (List<List<String>>) => InputType.chars,
 					_ => throw UnsupportedError('Invalid solution input type')
 				};
 
@@ -53,7 +54,11 @@ class SolutionRunner {
 				final List<dynamic> input = [
 					switch (inputType) {
 						InputType.raw => inputContents,
-						InputType.lines => inputContents.split('\n')
+						InputType.lines => inputContents.split('\n'),
+						InputType.chars => inputContents
+							.split('\n')
+							.map((v) => v.split(''))
+							.toList()
 					}
 				];
 

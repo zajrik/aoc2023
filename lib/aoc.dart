@@ -1,6 +1,7 @@
 library aoc;
 
 import 'dart:io';
+import 'dart:math';
 import 'dart:mirrors';
 
 import 'package:collection/collection.dart';
