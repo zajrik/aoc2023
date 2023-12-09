@@ -20,8 +20,8 @@ int day3part1(List<List<String>> input) {
 	int result = 0;
 
 	String currentPart = '';
-	int startX = 0;
-	int startY = 0;
+	int partX = 0;
+	int partY = 0;
 
 	final RegExp numerical = RegExp(r'\d');
 	final RegExp symbol = RegExp(r'[^\d\.]');
@@ -33,16 +33,17 @@ int day3part1(List<List<String>> input) {
 	void finalizePart() {
 		parts.add(
 			Day3PartNumber(
-				x: startX,
-				y: startY,
+				x: partX,
+				y: partY,
 				len: currentPart.length,
 				value: int.parse(currentPart)
 			)
 		);
 
+		// Reset tracking
 		currentPart = '';
-		startX = 0;
-		startY = 0;
+		partX = 0;
+		partY = 0;
 	}
 
 	// Find all potential part numbers
@@ -58,8 +59,8 @@ int day3part1(List<List<String>> input) {
 			else if (numerical.hasMatch(input[x][y])) {
 				// Track starting position
 				if (currentPart.isEmpty) {
-					startX = x;
-					startY = y;
+					partX = x;
+					partY = y;
 				}
 
 				currentPart += input[x][y];
@@ -74,11 +75,11 @@ int day3part1(List<List<String>> input) {
 
 	// Find all valid parts
 	for (Day3PartNumber part in parts) {
-		int xStart = max(0, part.x - 1);
-		int xEnd = min(input.length - 1, part.x + 1);
+		final int xStart = max(0, part.x - 1);
+		final int xEnd = min(input.length - 1, part.x + 1);
 
-		int yStart = max(0, part.y - 1);
-		int yEnd = min(input[0].length - 1, part.y + part.len);
+		final int yStart = max(0, part.y - 1);
+		final int yEnd = min(input[part.x].length - 1, part.y + part.len);
 
 		partCheck: for (int x = xStart; x <= xEnd; x++) {
 			for (int y = yStart; y <= yEnd; y++) {
@@ -96,4 +97,8 @@ int day3part1(List<List<String>> input) {
 	}
 
 	return result;
+
+	// return validParts
+	// 	.map((p) => p.value)
+	// 	.fold(0, (a, b) => a + b);
 }
