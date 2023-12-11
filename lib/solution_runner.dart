@@ -2,15 +2,14 @@ part of aoc;
 
 class SolutionRunner {
 	/// Runs all Advent of Code solutions and prints their results.
-	static Future<void> runSolutions() async {
+	static Future<void> runSolutions(List<int> daysToRun) async {
 		final String scriptPath = Platform.script.directory.path;
-		final MirrorSystem mirrorSystem = currentMirrorSystem();
-		final LibraryMirror aoc = mirrorSystem.findLibrary(#aoc);
+		final LibraryMirror aoc = currentMirrorSystem().findLibrary(#aoc);
 
 		// Prepare solutions map
-		final List<int> days = List.generate(25, (i) => i + 1);
+		final List<int> daysToPrepare = List.generate(25, (i) => i + 1);
 		final Map<int, Map<int, MethodMirror>> solutions = Map.fromIterable(
-			days,
+			daysToPrepare,
 			value: (_) => {}
 		);
 
@@ -26,7 +25,7 @@ class SolutionRunner {
 		}
 
 		// Execute solutions
-		for (int day in days) {
+		for (int day in daysToRun) {
 			for (int part in [1, 2]) {
 				// Skip solutions that don't exist yet
 				if (!solutions[day]!.containsKey(part)) {
