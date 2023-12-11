@@ -63,7 +63,12 @@ class SolutionRunner {
 				];
 
 				// Execute solution
-				final int result = aoc.invoke(solution.simpleName, input).reflectee;
+				FutureOr<int> result = aoc.invoke(solution.simpleName, input).reflectee;
+
+				// Await result if solution was async
+				if (result is Future<int>) {
+					result = await result;
+				}
 
 				// Skip printing unimplemented solutions
 				if (result == 0) {
