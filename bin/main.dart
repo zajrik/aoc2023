@@ -14,8 +14,8 @@ void main(List<String> arguments) async {
 
 	final String daysArg = argParser.parse(arguments)['days'];
 
-	final RegExp commaDays = RegExp(r'\d+(?:,\d+)*');
-	final RegExp hyphenDays = RegExp(r'\d+-\d+');
+	final RegExp commaDays = RegExp(r'^\d+(?:,\d+)*$');
+	final RegExp hyphenDays = RegExp(r'^\d+-\d+$');
 
 	final List<int> daysToRun = [];
 
