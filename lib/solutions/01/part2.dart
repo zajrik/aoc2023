@@ -16,8 +16,8 @@ int day1part2(List<String> input) {
 	};
 
 	return input
-		.map((v) => numberRegex.allMatches(v).map((e) => e[1]))
-		.map((v) => v.map((e) => numberMap.containsKey(e) ? numberMap[e] : e))
+		.map((v) => numberRegex.allMatches(v).map((e) => e.group(1)))
+		.map((v) => v.map((e) => numberMap[e] ?? e))
 		.map((v) => int.parse('${v.first}${v.last}'))
 		.fold(0, (a, b) => a + b);
 }
